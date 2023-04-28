@@ -1,0 +1,9 @@
+<mat-list dense>
+    <mat-list-item *ngFor="let book of readerBooks">
+        <img [src]=" book.readerData?.picture || book.googleData?.pictureUrl" alt=":" style="max-height: 150px;">
+        <div matListItemTitle> {{ book.readerData?.title || book.googleData?.title}}</div>
+        <div matListItemLine> {{ book.readerData?.authors || book.googleData?.authors}}</div>
+        <mat-divider></mat-divider>
+        <div matListItemLine [innerHTML]=""> {{ book.readerData?.description || book.googleData?.description}}</div>
+    </mat-list-item>
+</mat-list>

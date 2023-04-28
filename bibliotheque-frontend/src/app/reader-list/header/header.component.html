@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <div class="col"> Bibliotheque</div>
+    <a routerLink="Julie/books" mat-button routerLinkActive="active" class="col">
+        Liste de Julie
+    </a>
+    <a routerLink="Maminou/books" mat-button routerLinkActive="active" class="col">
+        Liste de Maminou
+    </a>
+    <app-google-books-autocompletion (autocompleteItemSelected)="load($event)" class="col-9"
+        style="padding-top: 20px"></app-google-books-autocompletion>
+</mat-toolbar>

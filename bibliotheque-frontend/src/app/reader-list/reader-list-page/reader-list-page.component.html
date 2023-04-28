@@ -1,0 +1,3 @@
+<app-header [searchBookSubject]="searchedBookSubject"></app-header>
+<app-book-to-add (onReaderAddBook)="addBookToLibrary($event)" [searchBookSubject]="searchedBookSubject"></app-book-to-add>
+<app-reader-list [readerBooks]="readerBooks"></app-reader-list>

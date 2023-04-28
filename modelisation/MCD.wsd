@@ -1,0 +1,26 @@
+@startuml Diagramme de classes
+
+title Diagramme de classes 
+hide methods
+
+class Livre {
+    id: string
+    resume: string
+    picture: Byte[]
+}
+
+class AvisLecteur {
+    commentaire: number
+    isRead: boolean
+    note: number
+}
+
+class Lecteur {
+    nom?: string
+    prenom: string
+    livres: Livre[]
+}
+
+Lecteur "*"--"*" AvisLecteur
+AvisLecteur "*"--"1" Livre
+@enduml

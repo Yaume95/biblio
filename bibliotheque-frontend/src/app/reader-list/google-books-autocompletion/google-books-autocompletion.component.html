@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-8">
+        <mat-form-field floatPlaceholder="Rechercher un livre" style="width: 100%">
+            <input matInput placeholder="Rechercher un livre" [matAutocomplete]="auto" [(ngModel)]="inputText"
+                type="search" (ngModelChange)="searchBooks(inputText)"> <mat-icon matIconSuffix color="primary">search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col"></div>
+</div>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBookTitle" (optionSelected)="onValueSelected($event)">
+    <mat-option *ngFor="let result of searchResults" [value]="result" class="row">
+        <div class="row">
+            <div class="col-1">
+                <img [src]="getCover(result)" alt="">
+            </div>
+            <div class="col">
+                <div class="row" matListItemTitle>{{ result.title }}</div>
+                <div class="row" matListItemLine>{{ result.authors}}</div>
+            </div>
+        </div>
+    </mat-option>
+</mat-autocomplete>

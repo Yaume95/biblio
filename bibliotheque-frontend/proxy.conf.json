@@ -1,0 +1,10 @@
+{
+    "/bibliotheque": {
+        "target": "http://localhost:8083",
+        "source": false
+    },
+    "/google-books": {
+        "target": "http://localhost:8080",
+        "secure": false
+    }
+}

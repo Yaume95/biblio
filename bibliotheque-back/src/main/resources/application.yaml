@@ -1,0 +1,28 @@
+server:
+  port: 8083
+  servlet:
+      contextPath: /bibliotheque
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: bibliotheque
+
+  datasource:
+    url: jdbc:mariadb://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:bibliotheque}
+    username: ${DATABASE_USER:root}
+    password: ${DATABASE_PASSWORD:root}
+    driverClassName: org.mariadb.jdbc.Driver
+
+  liquibase:
+    change-log: classpath:/liquibase/db.changelog.xml
+    drop-first: false
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

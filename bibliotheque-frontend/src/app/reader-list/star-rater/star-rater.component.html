@@ -1,0 +1,5 @@
+<button mat-icon-button color="accent" *ngFor="let star of [0, 1, 2 ,3, 4]; index as i" [id]="'star_'+i" (click)="rate(i+1)">
+    <mat-icon small>
+        {{showIcon(i)}}
+    </mat-icon>
+</button>

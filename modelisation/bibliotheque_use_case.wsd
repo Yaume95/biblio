@@ -1,0 +1,20 @@
+@startuml Usecase de l'application
+
+package Application {
+    usecase "Ajouter un lecteur"
+    usecase "Supprimer un lecteur"
+    usecase "Consulter la liste des livres 'Lu' par lecteur"
+    usecase "Consulter la liste des livres 'Non-lu' par lecteur"
+
+    package "Liste de lecteur" {
+        usecase "Ajouter un livre"
+        usecase "Supprimer un livre"
+        usecase "Ajouter un commentaire"
+        usecase "Ajouter une date de fin de lecture"
+        usecase "Passer le livre à 'Lu'"
+        usecase "Passer le livre à 'Non-lu'"
+        usecase "Noter"
+    }
+}
+
+@enduml
