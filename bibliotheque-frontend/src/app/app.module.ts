@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ReaderListModule } from './reader-list/reader-list.module';
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
   ],
   imports: [
     AppRoutingModule,

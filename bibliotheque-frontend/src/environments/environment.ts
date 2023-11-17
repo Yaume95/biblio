@@ -1,5 +1,5 @@
 export const environment = {
     name: 'local',
-    bibliothequeBackUrl: '/bibliotheque',
-    googleBooksBackUrl: '/google-books'
+    bibliothequeDataserviceUrl: '/bibliotheque-dataservice',
+    booksWebserviceUrl: '/books-webservice'
 }

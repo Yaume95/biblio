@@ -1,9 +1,65 @@
-<mat-list dense>
-    <mat-list-item *ngFor="let book of readerBooks">
-        <img [src]=" book.readerData?.picture || book.googleData?.pictureUrl" alt=":" style="max-height: 150px;">
-        <div matListItemTitle> {{ book.readerData?.title || book.googleData?.title}}</div>
-        <div matListItemLine> {{ book.readerData?.authors || book.googleData?.authors}}</div>
-        <mat-divider></mat-divider>
-        <div matListItemLine [innerHTML]=""> {{ book.readerData?.description || book.googleData?.description}}</div>
-    </mat-list-item>
-</mat-list>
+<div class="container-fluid">
+    <div class="row sticky-top align-self-center" style="margin-top: 5px; background-color: white;">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="row">
+                <div class="col-2">
+                    <mat-form-field>
+                        <mat-label> Critère de recherche</mat-label>
+                        <mat-select [(value)]="searchCriteria">
+                            <mat-option></mat-option>
+                            <mat-option [value]="option" *ngFor="let option of ['Nom']">{{ option }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-2">
+                    <mat-form-field>
+                        <mat-label> Filtre sur la lecture</mat-label>
+                        <mat-select [(value)]="isReadFilter" (valueChange)="getBooks()">
+                            <mat-option [value]="isReadOption.value" *ngFor="let isReadOption of isReadOptions">{{ isReadOption?.label }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label> Recherche </mat-label>
+                        <input matInput [(ngModel)]="searchText" (input)="getBooks()" [disabled]="!!!searchCriteria">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                        [showFirstLastButtons]="true" (page)="onPagination($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <mat-selection-list dense class="col-10" multiple="false" hideSingleSelectionIndicator="true"
+            [(ngModel)]="selectedOptions" (selectionChange)="bookSelectedForModification()">
+            <mat-list-option *ngFor="let item of readerBooks" class="reader-list" [value]="item">
+                <div class="row">
+                    <div class="col-1 image-container">
+                        <img [src]="item.book?.picture || DEFAULT_COVER_URL" alt=":">
+                    </div>
+                    <div class="col-8">
+                        <div matListItemTitle> {{ item.book?.title}} {{ item.book.volume ? (' - Tome ' +
+                            item.book.volume):
+                            '' }}</div>
+                        <div matListItemLine> {{ item.book?.authorFirstName}} {{item.book?.authorLastName }}</div>
+                        <div matListItemLine [innerHTML]="item.book?.description" style="white-space: normal;"></div>
+                    </div>
+                    <div class="col reader-metadata-container">
+                        <p> {{ item.isReadLabel }} </p>
+                        <p> {{item.areAllVolumesReadLabel }} </p>
+                        <app-star-rater [rating]="item.rating" [isEditable]="false"></app-star-rater>
+                        <p> {{item.book.pageCount }} pages</p>
+                        <p> {{item.book.category }} </p>
+                    </div>
+                </div>
+            </mat-list-option>
+        </mat-selection-list>
+        <div class="col"></div>
+    </div>
+</div>

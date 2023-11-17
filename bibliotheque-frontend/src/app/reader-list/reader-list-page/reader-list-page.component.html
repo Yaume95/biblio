@@ -1,3 +1,4 @@
-<app-header [searchBookSubject]="searchedBookSubject"></app-header>
-<app-book-to-add (onReaderAddBook)="addBookToLibrary($event)" [searchBookSubject]="searchedBookSubject"></app-book-to-add>
-<app-reader-list [readerBooks]="readerBooks"></app-reader-list>
+<app-header [searchBookSubject]="searchBookSubject"></app-header>
+<app-book-to-add (onReaderAddBook)="addBookToLibrary($event)" [searchBookSubject]="searchBookSubject"></app-book-to-add>
+<app-reader-list [reader]="reader" (onBookSelected)="bookSelected($event)"></app-reader-list>
+<router-outlet></router-outlet>

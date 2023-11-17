@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { GoogleBookData } from 'src/app/reader-list/models/google-book-data';
+import { Book } from 'src/app/reader-list/models/book';
+import { ReaderBookData } from 'src/app/reader-list/models/reader-book-data';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,10 @@ import { GoogleBookData } from 'src/app/reader-list/models/google-book-data';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  @Input() searchBookSubject: Subject<GoogleBookData>;
+  @Input() searchBookSubject: Subject<ReaderBookData>;
 
-  public load(book: GoogleBookData): void {
-    this.searchBookSubject.next(book);
+  public load(book: Book): void {
+    this.searchBookSubject.next(new ReaderBookData(book, false, 0, null));
   }
 
 }

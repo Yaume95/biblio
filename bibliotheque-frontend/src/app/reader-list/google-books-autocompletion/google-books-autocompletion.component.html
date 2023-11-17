@@ -3,7 +3,8 @@
     <div class="col-8">
         <mat-form-field floatPlaceholder="Rechercher un livre" style="width: 100%">
             <input matInput placeholder="Rechercher un livre" [matAutocomplete]="auto" [(ngModel)]="inputText"
-                type="search" (ngModelChange)="searchBooks(inputText)"> <mat-icon matIconSuffix color="primary">search</mat-icon>
+                type="search" (ngModelChange)="searchBooks(inputText)"> <mat-icon matIconSuffix
+                color="primary">search</mat-icon>
         </mat-form-field>
     </div>
     <div class="col"></div>
@@ -17,7 +18,7 @@
             </div>
             <div class="col">
                 <div class="row" matListItemTitle>{{ result.title }}</div>
-                <div class="row" matListItemLine>{{ result.authors}}</div>
+                <div class="row" matListItemLine> {{ result.authorFirstName }} {{ result.authorLastName }}</div>
             </div>
         </div>
     </mat-option>

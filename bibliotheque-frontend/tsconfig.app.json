@@ -6,7 +6,6 @@
     "types": [
       "@angular/localize"
     ],
-    "strictPropertyInitialization": false
   },
   "files": [
     "src/main.ts"

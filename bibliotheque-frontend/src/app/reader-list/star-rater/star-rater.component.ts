@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-star-rater',
@@ -7,9 +7,10 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 })
 export class StarRaterComponent {
   @Input() rating: number;
+  @Input() isEditable: boolean;
   @Output() rateChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  public showIcon(i: number) {
+  public showIcon(i: number): string {
     if (this.rating >= i + 1) {
       return 'star';
     }
@@ -17,7 +18,7 @@ export class StarRaterComponent {
   }
 
 
-  rate(value: number) {
+  rate(value: number): void {
     this.rating = value;
     this.rateChanged.emit(value);
   }

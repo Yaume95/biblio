@@ -1,0 +1,22 @@
+mat-list-option.reader-list {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+
+    div.image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>img {
+            max-height: 150px;
+        }
+    }
+
+    div.book-description {
+        white-space: normal;
+    }
+
+    div.reader-metadata-container {
+        border-left: 1px solid lightgray;
+    }
+}

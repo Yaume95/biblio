@@ -1,24 +1,55 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title style="height: 1.5rem;">{{googleBook.title || 'Titre'}} </mat-card-title>
-        <mat-card-subtitle style="height: 1.5rem;">{{googleBook.authors || 'Auteurs'}}</mat-card-subtitle>
+        <mat-card-title>
+            <mat-form-field>
+                <mat-label> Titre </mat-label>
+                <input matInput [(ngModel)]="readerBook.book.title" placeholder="Entrez un titre">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label> Tome </mat-label>
+                <input matInput [(ngModel)]="readerBook.book.volume" placeholder="Entrez le numéro du tome">
+            </mat-form-field>
+            -
+            <mat-form-field>
+                <mat-label> Prénom </mat-label>
+                <input matInput [(ngModel)]="readerBook.book.authorFirstName" placeholder="Entrez un prénom">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label> Nom </mat-label>
+                <input matInput [(ngModel)]="readerBook.book.authorLastName" placeholder="Entrez un nom">
+            </mat-form-field>
+
+        </mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <div class="row">
-            <img matCardImageMedium [src]="getCover(googleBook)" alt="" class="col-1">
+            <div class="col-1">
+                <img [src]="readerBook.book.getCover()" alt="">
+            </div>
             <div class="col">
-                <div class="row"> <mat-form-field floatPlaceholder="auto">
-                        <textarea matInput [(ngModel)]="googleBook.description" placeholder="Résumé"></textarea>
+                <div class="row">
+                    <mat-form-field floatPlaceholder="auto">
+                        <mat-label> Résumé </mat-label>
+                        <textarea matInput [(ngModel)]="readerBook.book.description" placeholder="Entrez un résumé"
+                            rows="5" style="resize: none; max-inline-size: 8;"></textarea>
                     </mat-form-field>
                 </div>
-                <div class="row"> <mat-form-field floatPlaceholder="auto">
-                        <textarea matInput placeholder="Ajouter un commentaire"></textarea>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Catégorie</mat-label>
+                        <mat-select [(ngModel)]="readerBook.book.category" name="food">
+                            <mat-option *ngFor="let c of categories" [value]="c">
+                                {{c}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>
             <div class="col-2">
                 <mat-form-field class="row">
-                    <input matInput [(ngModel)]="readingDate" [matDatepicker]="picker" placeholder="dd/mm/yyyy">
+                    <mat-label> Date de lecture </mat-label>
+                    <input matInput [(ngModel)]="readerBook.readingDate" [matDatepicker]="picker"
+                        placeholder="jj/mm/aaaa" (ngModelChange)="readerBook.isRead = $event != null">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -26,25 +57,31 @@
                     <div class="col-2">
                         Note :
                     </div>
-                    <app-star-rater [rating]="rating" (rateChanged)="rating = $event" class="col"></app-star-rater>
+                    <app-star-rater [rating]="readerBook.rating" (rateChanged)="readerBook.rating = $event" class="col"
+                        [isEditable]="true"></app-star-rater>
                 </div>
                 <div class="row">
                     <div class="col">
-                        Nombre de pages : <span *ngIf="!!googleBook.pageCount; else elseBlock">
-                            {{ googleBook.pageCount}}</span>
-                        <ng-template #elseBlock>
-                            <input matInput maxlength="4">
-                        </ng-template>
+                        <mat-label> Nombre de pages : </mat-label>
+                        <mat-form-field floatPlaceholder="auto" class="col-3">
+                            <input matInput maxlength="4" [(ngModel)]="readerBook.book.pageCount">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <mat-checkbox [(ngModel)]="readerBook.isRead"> Lu</mat-checkbox>
+                    </div>
+                    <div class="col">
+                        <mat-checkbox [(ngModel)]="readerBook.allVolumesRead"> Saga terminée</mat-checkbox>
                     </div>
                 </div>
             </div>
         </div>
     </mat-card-content>
-    <br>
     <mat-divider></mat-divider>
     <mat-card-actions>
-        <button mat-button (click)="addReaderBook()">Ajouter</button>
-        <button mat-button (click)="true">Modifier</button>
-        <button mat-button (click)="clear()"> Effacer</button>
+        <button mat-button (click)="addReaderBook()">Enregistrer</button>
+        <button mat-button (click)="clear()">Annuler</button>
     </mat-card-actions>
 </mat-card>
